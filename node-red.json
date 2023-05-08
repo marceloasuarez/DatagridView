@@ -1,0 +1,344 @@
+[
+    {
+        "id": "273ec3032ab44851",
+        "type": "tab",
+        "label": "DataGridView",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "646ff26aad4188ec",
+        "type": "http in",
+        "z": "273ec3032ab44851",
+        "name": "",
+        "url": "/produtos",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "3e7db75287c9eb17"
+            ]
+        ]
+    },
+    {
+        "id": "3e7db75287c9eb17",
+        "type": "function",
+        "z": "273ec3032ab44851",
+        "name": "function 1",
+        "func": "let query=\"select * from produto\";\nmsg.topic=query;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 80,
+        "wires": [
+            [
+                "726eacb5b36ba675"
+            ]
+        ]
+    },
+    {
+        "id": "f05ddf8065d78eb5",
+        "type": "http response",
+        "z": "273ec3032ab44851",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 730,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "726eacb5b36ba675",
+        "type": "mysql",
+        "z": "273ec3032ab44851",
+        "mydb": "c2649b007380a0b6",
+        "name": "",
+        "x": 540,
+        "y": 80,
+        "wires": [
+            [
+                "f05ddf8065d78eb5",
+                "5c3049491e95596c"
+            ]
+        ]
+    },
+    {
+        "id": "5c3049491e95596c",
+        "type": "debug",
+        "z": "273ec3032ab44851",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a1161dd8cf766a37",
+        "type": "http in",
+        "z": "273ec3032ab44851",
+        "name": "",
+        "url": "/removeproduto/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 360,
+        "wires": [
+            [
+                "810137d5935cd454"
+            ]
+        ]
+    },
+    {
+        "id": "810137d5935cd454",
+        "type": "function",
+        "z": "273ec3032ab44851",
+        "name": "function",
+        "func": "let id=msg.req.params.id\nlet query=`DELETE FROM produto WHERE n_id_produto=${id}`;\nmsg.topic=query;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 360,
+        "wires": [
+            [
+                "b604923153a61964"
+            ]
+        ]
+    },
+    {
+        "id": "73df9c891c96f2cd",
+        "type": "http response",
+        "z": "273ec3032ab44851",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 750,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "b604923153a61964",
+        "type": "mysql",
+        "z": "273ec3032ab44851",
+        "mydb": "c2649b007380a0b6",
+        "name": "",
+        "x": 560,
+        "y": 360,
+        "wires": [
+            [
+                "73df9c891c96f2cd",
+                "af14f0c2254063ff"
+            ]
+        ]
+    },
+    {
+        "id": "af14f0c2254063ff",
+        "type": "debug",
+        "z": "273ec3032ab44851",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "f70805958e94655f",
+        "type": "http in",
+        "z": "273ec3032ab44851",
+        "name": "",
+        "url": "/produto/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "0b276e751fa7e2eb"
+            ]
+        ]
+    },
+    {
+        "id": "0b276e751fa7e2eb",
+        "type": "function",
+        "z": "273ec3032ab44851",
+        "name": "function 2",
+        "func": "let id = msg.req.params.id\nlet query = `SELECT * FROM produto WHERE n_id_produto=${id}`;\nmsg.topic = query;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "67a88d53b0b39e42"
+            ]
+        ]
+    },
+    {
+        "id": "3d189c8fb7507c90",
+        "type": "http response",
+        "z": "273ec3032ab44851",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 730,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "67a88d53b0b39e42",
+        "type": "mysql",
+        "z": "273ec3032ab44851",
+        "mydb": "c2649b007380a0b6",
+        "name": "",
+        "x": 540,
+        "y": 200,
+        "wires": [
+            [
+                "3d189c8fb7507c90",
+                "b61b2ba3ed3dbf9f"
+            ]
+        ]
+    },
+    {
+        "id": "b61b2ba3ed3dbf9f",
+        "type": "debug",
+        "z": "273ec3032ab44851",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "780fdce28721e693",
+        "type": "http in",
+        "z": "273ec3032ab44851",
+        "name": "",
+        "url": "/updateproduto/:id/:produto/:marca/:modelo",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 500,
+        "wires": [
+            [
+                "1cfa17c8292fe187"
+            ]
+        ]
+    },
+    {
+        "id": "1cfa17c8292fe187",
+        "type": "function",
+        "z": "273ec3032ab44851",
+        "name": "function",
+        "func": "let id=msg.req.params.id\nlet produto = msg.req.params.produto\nlet marca = msg.req.params.marca\nlet modelo = msg.req.params.modelo\nlet query = `UPDATE produto SET s_nome_produto=\"${produto}\", s_marca_produto=\"${marca}\", s_modelo_produto=\"${modelo}\" WHERE n_id_produto=${id}`;\nmsg.topic=query;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 500,
+        "wires": [
+            [
+                "e843baf575e36e90"
+            ]
+        ]
+    },
+    {
+        "id": "777a813d9b7d6ad6",
+        "type": "http response",
+        "z": "273ec3032ab44851",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 910,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "e843baf575e36e90",
+        "type": "mysql",
+        "z": "273ec3032ab44851",
+        "mydb": "c2649b007380a0b6",
+        "name": "",
+        "x": 740,
+        "y": 500,
+        "wires": [
+            [
+                "777a813d9b7d6ad6",
+                "f8e9109810d5a42c"
+            ]
+        ]
+    },
+    {
+        "id": "f8e9109810d5a42c",
+        "type": "debug",
+        "z": "273ec3032ab44851",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "c2649b007380a0b6",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "cursojavascript",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]
